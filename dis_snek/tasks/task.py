@@ -47,7 +47,7 @@ class Task:
     _stop: bool
     iteration: int
 
-    def __init__(self, callback: Callable, trigger: BaseTrigger):
+    def __init__(self, callback: Callable, trigger: BaseTrigger) -> None:
         self.callback = callback
         self.trigger = trigger
         self._stop = False
@@ -84,13 +84,13 @@ class Task:
         else:
             asyncio.gather(asyncio.to_thread(self.callback))
 
-    def _fire(self, fire_time: datetime):
+    def _fire(self, fire_time: datetime) -> None:
         """Called when the task is being fired"""
         self.trigger.last_call_time = fire_time
         self()
         self.iteration += 1
 
-    async def _task_loop(self):
+    async def _task_loop(self) -> None:
         while not self._stop:
             fire_time = self.trigger.next_fire()
             if fire_time is None:
@@ -138,7 +138,7 @@ class Task:
             trigger: The trigger to use for this task
         """
 
-        def wrapper(func: Callable):
+        def wrapper(func: Callable) -> "Task":
             return cls(func, trigger)
 
         return wrapper

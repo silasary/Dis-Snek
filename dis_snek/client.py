@@ -267,7 +267,7 @@ class Snake(
         return self._closed
 
     @property
-    def is_ready(self):
+    def is_ready(self) -> bool:
         """Returns True if the bot is ready"""
         return self._ready.is_set()
 
@@ -324,7 +324,7 @@ class Snake(
         return self._activity
 
     @property
-    def application_commands(self):
+    def application_commands(self) -> Dict[str, InteractionCommand]:
         """a list of all application commands registered within the bot"""
         commands = []
         for scope in self.interactions.keys():
@@ -380,7 +380,7 @@ class Snake(
         """
         return self.default_prefix
 
-    async def login(self, token):
+    async def login(self, token) -> None:
         """
         Login to discord
 
@@ -559,7 +559,7 @@ class Snake(
             self.dispatch(events.Startup())
         self.dispatch(events.Ready())
 
-    def start(self, token):
+    def start(self, token) -> None:
         """
         Start the bot.
 
@@ -579,7 +579,7 @@ class Snake(
         self._ready.clear()
         await self._connection_state.stop()
 
-    def dispatch(self, event: events.BaseEvent, *args, **kwargs):
+    def dispatch(self, event: events.BaseEvent, *args, **kwargs) -> None:
         """
         Dispatch an event.
 

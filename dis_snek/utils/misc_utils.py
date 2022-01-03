@@ -1,7 +1,7 @@
 import functools
 import inspect
 import re
-from typing import Callable, Iterable, Optional, Any
+from typing import Any, Callable, Dict, Iterable, Optional
 
 mention_reg = re.compile(r"@(everyone|here|[!&]?[0-9]{17,20})")
 
@@ -76,5 +76,5 @@ def wrap_partial(obj, cls):
     return obj
 
 
-def get_parameters(callback: Callable):
+def get_parameters(callback: Callable) -> Dict[str, inspect.Parameter]:
     return {p.name: p for p in inspect.signature(callback).parameters.values()}

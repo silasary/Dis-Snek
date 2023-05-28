@@ -25,7 +25,7 @@ from typing import (
     Literal,
 )
 
-from discord_typings.interactions.receiving import (
+from discord_typings._interactions._receiving import (
     ComponentChannelInteractionData,
     AutocompleteChannelInteractionData,
     InteractionData,
